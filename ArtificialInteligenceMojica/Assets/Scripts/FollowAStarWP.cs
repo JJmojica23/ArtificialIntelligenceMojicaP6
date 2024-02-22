@@ -1,26 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FollowAStarWP : MonoBehaviour
 {
-    Transform goal;
-    public float speed = 5.0f;
-    float accuracy = 5.0f;
-    public float rotSpeed = 2.0f;
-
     public GameObject wpManager;
     GameObject[] wps;
     GameObject currentNode;
-    int currentWP = 0;
-    Graph g;
+    NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
         wps = wpManager.GetComponent<WPManager>().waypoints;
-        g = wpManager.GetComponent<WPManager>().graph;
+        ///g = wpManager.GetComponent<WPManager>().graph;
         currentNode = wps[0];
+        agent = this.GetComponent<NavMeshAgent>();
 
         //Invoke("GoToRuin", 2);
 
@@ -29,31 +25,32 @@ public class FollowAStarWP : MonoBehaviour
 
     public void GoToHeli()
     {
-        g.AStar(currentNode, wps[0]);
-        currentWP = 0;
+        //g.AStar(currentNode, wps[0]);
+        agent.SetDestination(wps[0].transform.position);
     }
 
     public void GoToRuin()
     {
-        g.AStar(currentNode, wps[6]);
-        currentWP = 0;
+        //g.AStar(currentNode, wps[6]);
+        agent.SetDestination(wps[6].transform.position);
     }
 
     public void GoToFactory()
     {
-        g.AStar(currentNode, wps[7]);
-        currentWP = 0;
+        //g.AStar(currentNode, wps[7]);
+        agent.SetDestination(wps[7].transform.position);
     }
 
     public void GoToCamp()
     {
-        g.AStar(currentNode, wps[1]);
-        currentWP = 0;
+        //g.AStar(currentNode, wps[1]);
+        agent.SetDestination(wps[1].transform.position);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        /*
         if(g.pathList.Count == 0 || currentWP == g.pathList.Count)
             return;
 
@@ -73,5 +70,6 @@ public class FollowAStarWP : MonoBehaviour
                 Quaternion.LookRotation(direction), Time.deltaTime * rotSpeed);
             this.transform.Translate(0, 0, speed * Time.deltaTime); 
         }
+        */
     }
 }
