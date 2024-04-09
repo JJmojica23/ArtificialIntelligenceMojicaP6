@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - wp
+  - AI
+  - Checkpoint
+  - Fire
+  - CinemachineTarget
+  - Safe
+  - hide
+  - cop
+  - goal
+  - agent
   layers:
   - Default
   - TransparentFX
