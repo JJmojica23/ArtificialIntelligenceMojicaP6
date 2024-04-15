@@ -109,7 +109,7 @@ public class GPlanner
                 }
                 else
                 {
-                    List<GAction> subset = ActionSubset(usuableActions, action);
+                    List<GAction> subset = ActionSubset(usableActions, action);
                     bool found = BuildGraph(node, leaves, subset, goal);
                     if (found)
                     {
@@ -121,4 +121,27 @@ public class GPlanner
 
         return foundPath;
     }
+
+    private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
+    {
+        foreach (KeyValuePair <string, int> g in goal)
+        {
+            if (!state.ContainsKey(g.Key))
+                return false;
+        }
+        return true;
+    }
+
+    private List<GAction> ActionSubset(List<GAction> actions, GAction removeMe)
+    {
+        List<GAction> subset = new List<GAction>();
+        foreach (GAction a in actions)
+        {
+            if (!a.Equals(removeMe))
+                subset.Add(a);
+        }
+        return subset;
+    }
+
+
 }
